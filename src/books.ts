@@ -61,3 +61,23 @@ export function toggleRead(books: Book[], id: string): Book[] {
     book.id === id ? { ...book, read: !book.read } : book,
   );
 }
+
+/**
+ * Returns only the books that are not read yet.
+ */
+export function filterUnread(books: Book[]): Book[] {
+  return books.filter((book) => !book.read);
+}
+
+/**
+ * Returns a copy of the books where the book with the given id has the new
+ * rating. Rating the book with its current rating again removes the rating.
+ */
+export function rateBook(books: Book[], id: string, rating: number): Book[] {
+  if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
+    throw new Error(`A rating must be a whole number from 1 to 5, got ${rating}`);
+  }
+  return books.map((book) =>
+    book.id === id ? { ...book, rating: book.rating === rating ? null : rating } : book,
+  );
+}

@@ -26,3 +26,12 @@ describe("BookCard", () => {
     expect(onToggleRead).toHaveBeenCalledWith("1");
   });
 });
+
+describe("BookCard rating", () => {
+  it("calls onRate with the id and the clicked star", async () => {
+    const onRate = vi.fn();
+    render(<BookCard book={book} onToggleRead={() => {}} onRate={onRate} />);
+    await userEvent.click(screen.getByRole("button", { name: "3 stars" }));
+    expect(onRate).toHaveBeenCalledWith("1", 3);
+  });
+});
