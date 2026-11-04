@@ -81,3 +81,47 @@ export function rateBook(books: Book[], id: string, rating: number): Book[] {
     book.id === id ? { ...book, rating: book.rating === rating ? null : rating } : book,
   );
 }
+
+export type NewBookInput = {
+  title: string;
+  author: string;
+  year: string;
+};
+
+export type NewBookErrors = Partial<Record<keyof NewBookInput, string>>;
+
+/**
+ * Validates the input of the "add a book" form. Returns an empty object when
+ * the input is valid.
+ */
+export function validateNewBook(input: NewBookInput, currentYear = new Date().getFullYear()): NewBookErrors {
+  const errors: NewBookErrors = {};
+  if (input.title.trim() === "") {
+    errors.title = "Please enter a title.";
+  }
+  if (input.author.trim() === "") {
+    errors.author = "Please enter an author.";
+  }
+  const year = Number(input.year);
+  if (!Number.isInteger(year) || year < 1450 || year > currentYear) {
+    errors.year = `Please enter a year between 1450 and ${currentYear}.`;
+  }
+  return errors;
+}
+
+/**
+ * Returns a new array with a new, unread and unrated book at the end.
+ */
+export function addBook(books: Book[], input: NewBookInput, id: string = crypto.randomUUID()): Book[] {
+  return [
+    ...books,
+    {
+      id,
+      title: input.title.trim(),
+      author: input.author.trim(),
+      year: Number(input.year),
+      rating: null,
+      read: false,
+    },
+  ];
+}

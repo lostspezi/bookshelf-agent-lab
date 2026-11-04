@@ -81,3 +81,22 @@ body {
 .book-card:not(.book-card--read) .book-meta {
   color: var(--muted);
 }
+
+.add-book-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  margin-top: 16px;
+}
+
+.add-book-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.add-book-form [role="alert"] {
+  color: #a3261b;
+  font-size: 0.85rem;
+}

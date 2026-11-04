@@ -1,15 +1,21 @@
-import { useState } from "react";
-import { filterUnread, rateBook, searchBooks, sortByYear, toggleRead, type Book } from "./books";
+import { useEffect, useState } from "react";
+import { addBook, filterUnread, rateBook, searchBooks, sortByYear, toggleRead, type Book } from "./books";
+import { loadBooks, saveBooks } from "./storage";
 import { initialBooks } from "./data/books";
+import { AddBookForm } from "./components/AddBookForm";
 import { BookCard } from "./components/BookCard";
 import { SearchBar } from "./components/SearchBar";
 import { StatsCard } from "./components/StatsCard";
 
 export function App() {
-  const [books, setBooks] = useState<Book[]>(initialBooks);
+  const [books, setBooks] = useState<Book[]>(() => loadBooks(initialBooks));
   const [query, setQuery] = useState("");
   const [sorted, setSorted] = useState(false);
   const [onlyUnread, setOnlyUnread] = useState(false);
+
+  useEffect(() => {
+    saveBooks(books);
+  }, [books]);
 
   const searched = searchBooks(books, query);
   const found = onlyUnread ? filterUnread(searched) : searched;
@@ -19,6 +25,7 @@ export function App() {
     <main className="app">
       <h1>Bookshelf</h1>
       <StatsCard books={books} />
+      <AddBookForm onAdd={(input) => setBooks((current) => addBook(current, input))} />
       <div className="toolbar">
         <SearchBar value={query} onChange={setQuery} />
         <label>
