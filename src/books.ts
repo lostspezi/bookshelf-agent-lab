@@ -12,29 +12,37 @@ export type Book = {
  * Returns the books whose title or author contains the query.
  */
 export function searchBooks(books: Book[], query: string): Book[] {
-  const trimmed = query.trim();
-  if (trimmed === "") {
-    return books;
+  const needle = query.trim().toLowerCase();
+  if (needle === "") {
+    return [...books];
   }
-  return books.filter((book) => book.title.includes(trimmed));
+  return books.filter(
+    (book) =>
+      book.title.toLowerCase().includes(needle) ||
+      book.author.toLowerCase().includes(needle),
+  );
 }
 
 /**
- * Returns the average rating of the books, rounded to one decimal.
+ * Returns the average rating of the rated books, rounded to one decimal.
+ * Books without a rating are ignored. Returns null if no book has a rating.
  */
 export function averageRating(books: Book[]): number | null {
-  if (books.length === 0) {
+  const ratings = books
+    .map((book) => book.rating)
+    .filter((rating): rating is number => rating !== null);
+  if (ratings.length === 0) {
     return null;
   }
-  const sum = books.reduce((total, book) => total + (book.rating ?? 0), 0);
-  return Math.round((sum / books.length) * 10) / 10;
+  const sum = ratings.reduce((total, rating) => total + rating, 0);
+  return Math.round((sum / ratings.length) * 10) / 10;
 }
 
 /**
  * Returns the books sorted by year, oldest first.
  */
 export function sortByYear(books: Book[]): Book[] {
-  return books.sort((a, b) => a.year - b.year);
+  return [...books].sort((a, b) => a.year - b.year);
 }
 
 /**

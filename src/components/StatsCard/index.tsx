@@ -6,7 +6,7 @@ export type StatsCardProps = {
 
 export function StatsCard({ books }: StatsCardProps) {
   const average = averageRating(books);
-  const read = books.length - countRead(books);
+  const read = countRead(books);
 
   return (
     <section className="stats-card" aria-label="Statistics">
