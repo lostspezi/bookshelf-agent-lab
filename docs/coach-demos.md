@@ -29,13 +29,17 @@ The four planted bugs (do not tell the students): see `solution/session-1` and t
 
 1. Start the app: `npm run dev` in a second terminal.
 2. **MCP.** `claude mcp add playwright -- npx -y @playwright/mcp@0.0.84` → `claude mcp list` → in Claude `/mcp`. Prompt: *"Open http://localhost:5173, mark Neuromancer as read, take a screenshot and describe what you see. Is every title readable?"* (The read cards hide their title: CSS bug.)
-3. **Sub-agent.** *"Create a read-only sub-agent named reviewer in .claude/agents/reviewer.md"* or copy it from `solution/session-3`. Then: *"Use the reviewer agent to review my changes."*
+3. **Sub-agents.** *"Create a read-only sub-agent named reviewer in .claude/agents/reviewer.md"* or copy `reviewer.md` and `test-auditor.md` from `solution/session-3`. Then: *"Use the reviewer agent to review my changes."* Run `/context` before and after.
+   **Parallel:** *"Use the reviewer agent and the test-auditor agent in parallel: the reviewer looks at my current diff, the test-auditor checks which rules of the specification have no test."* Point out: two separate contexts, both results come back as summaries, and both cost usage.
 4. **Hook.** Copy `.claude/hooks/protect-tests.mjs` from `solution/session-3`. Test it without Claude:
    ```bash
    echo '{"tool_input":{"file_path":"src/books.test.ts"}}' | node .claude/hooks/protect-tests.mjs; echo $?
    ```
    Register it in `.claude/settings.json`, then ask Claude to change a test.
-5. **GitHub (outlook).** `git switch feature/book-notes`, read `docs/pr-book-notes.md` (the "agent's" PR description) and compare it with `git diff main`.
+5. **Extra block (choose one):**
+   - **GitHub:** `git switch feature/book-notes`, read `docs/pr-book-notes.md` (the "agent's" PR description) and compare it with `git diff main...feature/book-notes`. Show `gh issue view` / `gh pr create` prompts.
+   - **Plugins:** `/plugin`, browse a marketplace, open one plugin's files before installing. Same rules as MCP: who publishes it, what runs, pin versions.
+   - **Everyday tips:** `claude -c` / `claude -r`, `/rename` before `/clear`, `/btw` for side questions, `@file`, `!command`, `Esc Esc` to rewind, `/usage` breakdown.
 
 ## Session 4: Working Safely
 
@@ -47,8 +51,9 @@ The four planted bugs (do not tell the students): see `solution/session-1` and t
    { "permissions": { "deny": ["Read(./.env)", "Read(./.env.*)", "Bash(curl *)"] } }
    ```
    Ask *"Show me the content of .env"* (blocked), then *"Run cat .env"* (also blocked now), then *"Run grep -r BOOKSHELF ."* (not blocked: it reads without naming the file).
-5. **Sandbox.** `/sandbox` on. Run `node lab/register.mjs` through Claude: the canary stays quiet, because localhost is not reachable from the sandbox.
-6. **Security review.** `git switch feature/book-notes`, then `/security-review` (needs an `origin` remote) or ask the `reviewer` agent.
+5. **Sandbox.** `/sandbox` on. Run `node lab/register.mjs` through Claude: the canary stays quiet, because localhost is not reachable from the sandbox. If Claude Code asks for network access to localhost, answer No and explain that this is the wall working.
+6. **Dev container.** Show `.devcontainer/devcontainer.json` from `solution/session-4` in VS Code: "Reopen in Container", then `claude` inside. Point out: the home folder with `~/.ssh` is not in the container, but the project folder is mounted and can still be changed.
+7. **Security review.** `git switch feature/book-notes`, then `/security-review` (needs an `origin` remote) or ask the `reviewer` agent.
 
 ## The planted problems
 
