@@ -15,6 +15,10 @@ describe("validateNewBook", () => {
     expect(Object.keys(errors).sort()).toEqual(["author", "title"]);
   });
 
+  it.each(["1450", "2026"])("accepts the boundary year %s", (year) => {
+    expect(validateNewBook({ title: "A", author: "B", year }, 2026).year).toBeUndefined();
+  });
+
   it.each(["1449", "2027", "19.5", "abc", ""])("rejects the year %s", (year) => {
     expect(validateNewBook({ title: "A", author: "B", year }, 2026).year).toBeDefined();
   });
