@@ -1,0 +1,84 @@
+- main [ref=e3]:
+  - heading "Bookshelf" [level=1] [ref=e4]
+  - region "Statistics" [ref=e5]:
+    - paragraph [ref=e6]: "Books: 5"
+    - paragraph [ref=e7]: "Read: 2"
+    - paragraph [ref=e8]: "Average rating: 4"
+  - form "Add a book" [ref=e9]:
+    - generic [ref=e10]:
+      - text: Title
+      - textbox "Title" [ref=e86]: Test Book
+    - generic [ref=e12]:
+      - text: Author
+      - textbox "Author" [ref=e87]: Test Author
+    - generic [ref=e14]:
+      - text: Year
+      - textbox "Year Please enter a year between 1450 and 2026." [invalid] [ref=e84]: "1449"
+      - alert [ref=e85]: Please enter a year between 1450 and 2026.
+    - button "Add book" [active] [ref=e16]
+  - generic [ref=e17]:
+    - generic [ref=e18]:
+      - text: Search
+      - searchbox "Search" [ref=e19]
+    - generic [ref=e20]:
+      - checkbox "Sort by year" [ref=e21]
+      - text: Sort by year
+    - generic [ref=e22]:
+      - checkbox "Only unread" [ref=e23]
+      - text: Only unread
+  - list [ref=e24]:
+    - listitem [ref=e25]:
+      - heading "Dune" [level=2] [ref=e26]
+      - paragraph [ref=e27]: Frank Herbert · 1965
+      - paragraph [ref=e28]: ★★★★★
+      - group "Rate Dune" [ref=e29]:
+        - button "1 star" [pressed] [ref=e30]: ★
+        - button "2 stars" [pressed] [ref=e31]: ★
+        - button "3 stars" [pressed] [ref=e32]: ★
+        - button "4 stars" [pressed] [ref=e33]: ★
+        - button "5 stars" [pressed] [ref=e34]: ★
+      - button "Mark as unread" [ref=e35]
+    - listitem [ref=e36]:
+      - heading "The Hobbit" [level=2] [ref=e37]
+      - paragraph [ref=e38]: J. R. R. Tolkien · 1937
+      - paragraph [ref=e39]: ★★★★
+      - group "Rate The Hobbit" [ref=e40]:
+        - button "1 star" [pressed] [ref=e41]: ★
+        - button "2 stars" [pressed] [ref=e42]: ★
+        - button "3 stars" [pressed] [ref=e43]: ★
+        - button "4 stars" [pressed] [ref=e44]: ★
+        - button "5 stars" [ref=e45]: ☆
+      - button "Mark as unread" [ref=e46]
+    - listitem [ref=e47]:
+      - heading "Neuromancer" [level=2] [ref=e48]
+      - paragraph [ref=e49]: William Gibson · 1984
+      - paragraph [ref=e50]: No rating yet
+      - group "Rate Neuromancer" [ref=e51]:
+        - button "1 star" [ref=e52]: ☆
+        - button "2 stars" [ref=e53]: ☆
+        - button "3 stars" [ref=e54]: ☆
+        - button "4 stars" [ref=e55]: ☆
+        - button "5 stars" [ref=e56]: ☆
+      - button "Mark as read" [ref=e57]
+    - listitem [ref=e58]:
+      - heading "Project Hail Mary" [level=2] [ref=e59]
+      - paragraph [ref=e60]: Andy Weir · 2021
+      - paragraph [ref=e61]: No rating yet
+      - group "Rate Project Hail Mary" [ref=e62]:
+        - button "1 star" [ref=e63]: ☆
+        - button "2 stars" [ref=e64]: ☆
+        - button "3 stars" [ref=e65]: ☆
+        - button "4 stars" [ref=e66]: ☆
+        - button "5 stars" [ref=e67]: ☆
+      - button "Mark as read" [ref=e68]
+    - listitem [ref=e69]:
+      - heading "The Left Hand of Darkness" [level=2] [ref=e70]
+      - paragraph [ref=e71]: Ursula K. Le Guin · 1969
+      - paragraph [ref=e72]: ★★★
+      - group "Rate The Left Hand of Darkness" [ref=e73]:
+        - button "1 star" [pressed] [ref=e74]: ★
+        - button "2 stars" [pressed] [ref=e75]: ★
+        - button "3 stars" [pressed] [ref=e76]: ★
+        - button "4 stars" [ref=e77]: ☆
+        - button "5 stars" [ref=e78]: ☆
+      - button "Mark as read" [ref=e79]
