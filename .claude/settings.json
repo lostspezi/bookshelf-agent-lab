@@ -1,4 +1,7 @@
 {
+  "permissions": {
+    "deny": ["Read(./.env)", "Read(./.env.*)", "Bash(curl *)", "Bash(wget *)"]
+  },
   "hooks": {
     "PreToolUse": [
       {
